@@ -1,0 +1,155 @@
+/* Modern Footer - Matches Landing Page Aesthetic */
+.footer__container {
+  width: 100%;
+  background-color: #F5F1EA; /* Cream background (matches landing) */
+  padding: 70px 5% 0;
+  display: flex;
+  flex-direction: column;
+  color: #2C3E2A; /* Deep green text (matches landing header) */
+  position: relative;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+/* Decorative gold accent (matches landing button) */
+.footer__container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #9A7B4F; /* Gold */
+}
+
+.footer__items__container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 60px; /* Consistent spacing */
+  padding-bottom: 50px;
+}
+
+/* Section containers */
+.footer__help__container,
+.footer__contact__container,
+.footer__social__link__container {
+  flex: 1;
+  min-width: 250px;
+  padding: 0 15px;
+}
+
+/* Section headers */
+.footer__help__header h1,
+.footer__contact__header h1,
+.footer__social__link__header h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2C3E2A; /* Deep green */
+  margin-bottom: 25px;
+  position: relative;
+}
+
+/* Header underline (gold accent) */
+.footer__help__header h1::after,
+.footer__contact__header h1::after,
+.footer__social__link__header h1::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: #9A7B4F; /* Gold */
+}
+
+/* Links list */
+.fotter__help__links,
+.footer__contacts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fotter__help__links li,
+.footer__contacts li {
+  margin-bottom: 15px; /* Consistent spacing */
+}
+.footer__contact:hover{
+  text-decoration: underline;
+}
+.fotter__help__links a,
+.footer__contacts a {
+  color: #555; /* Subdued text */
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: block;
+}
+
+.fotter__help__links a:hover,
+.footer__contacts a:hover {
+  color: #9A7B4F; /* Gold on hover */
+  transform: translateX(3px);
+  text-decoration: underline;
+
+}
+
+/* Social links */
+.footer__social__links {
+  display: flex;
+  gap: 15px; /* Tight grouping */
+  padding: 0;
+}
+
+.social__link {
+  width: 36px;
+  height: 36px;
+  background: rgba(154, 123, 79, 0.1); /* Gold tint */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.social__link:hover {
+  background: #9A7B4F; /* Solid gold */
+  transform: translateY(-3px);
+  /* to underline while hovering */
+  text-decoration: underline;
+}
+
+/* Copyright bar */
+.fotter__copyright__container {
+  width: 100%;
+  background: #7A5C3F; /* Deep green */
+  padding: 20px 5%;
+  text-align: center;
+  color: #F5F1EA; /* Cream text */
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer__items__container {
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .footer__help__header h1::after,
+  .footer__contact__header h1::after,
+  .footer__social__link__header h1::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .fotter__help__links a:hover,
+  .footer__contacts a:hover {
+    transform: none; /* Disable hover shift on mobile */
+  }
+}
