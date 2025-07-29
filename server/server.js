@@ -11,10 +11,7 @@ const { Item, User } = require("./models/itemsModel");
 connectDB();
 
 // Middlewares
-app.use(cors({
-  origin: "https://your-frontend.vercel.app",  // exact URL
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
