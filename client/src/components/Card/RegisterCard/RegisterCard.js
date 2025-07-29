@@ -45,7 +45,7 @@ const RegisterCard = () => {
 
         try {
             // Replace with your actual API endpoint
-            const response = await axios.post('https://backend-paw0.onrender.com/', {
+            const response = await axios.post('http://localhost:5000/register', {
                 firstName: formData.firstName,
                 lastName: formData.lastName,
                 email: formData.email,

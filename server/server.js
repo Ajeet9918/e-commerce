@@ -12,7 +12,7 @@ connectDB();
 
 // Middlewares
 app.use(cors({
-  origin: "https://backend-paw0.onrender.com",  // exact URL
+  origin: "https://your-frontend.vercel.app",  // exact URL
   credentials: true
 }));
 app.use(express.json());
