@@ -38,7 +38,7 @@ const itemSchema = mongoose.Schema(
         },
         detail: {
             type: String,
-            required: true
+            required: false
         },
         image: {
             type: Array,
@@ -51,20 +51,26 @@ const itemSchema = mongoose.Schema(
 )
 const userSchema = mongoose.Schema({
     firstName: {
-        type: String,},
+        type: String,
+        required: true
+    },
     lastName: {
-        type: String,},
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,
         unique: true
     },
     password: {
-        type: String,  
+        type: String,
         required: true,
         minlength: 8
     },
-}) ;
+}, {
+    timestamps: true
+});
 const User = mongoose.model("User", userSchema);
 const Item = mongoose.model("Item", itemSchema);
-module.exports = {Item, User};
+module.exports = { Item, User };

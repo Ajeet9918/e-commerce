@@ -1496,3 +1496,5 @@ const itemsCollection = [
         "__v": 0
     }
 ]
+
+module.exports = itemsCollection;

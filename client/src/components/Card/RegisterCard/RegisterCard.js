@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import axios from 'axios';
 import { useAuth } from '../../../Context/AuthContext';
+import { authAPI } from '../../../utils/api';
 import './RegisterCard.css';
 
 const RegisterCard = () => {
@@ -44,58 +44,53 @@ const RegisterCard = () => {
         }
 
         try {
-            // Replace with your actual API endpoint
-            const response = await axios.post('http://localhost:5000/register', {
+            const data = await authAPI.register({
                 firstName: formData.firstName,
                 lastName: formData.lastName,
                 email: formData.email,
                 password: formData.password
             });
 
-            if (response.data.success) {
-                // Store user data and token
-                localStorage.setItem('authToken', response.data.token);
-                localStorage.setItem('user', JSON.stringify(response.data.user));
-                
+            if (data.success) {
                 // Update auth context
-                login(response.data.user, response.data.token);
-                
+                login(data.user, data.token);
+
                 // Redirect to home with welcome message
-                navigate('/', { 
-                    state: { 
-                        welcomeMessage: `Welcome ${formData.firstName}! Your account has been created successfully.` 
-                    } 
+                navigate('/', {
+                    state: {
+                        welcomeMessage: `Welcome ${formData.firstName}! Your account has been created successfully.`
+                    }
                 });
             } else {
-                setError(response.data.message || 'Registration failed');
+                setError(data.message || 'Registration failed');
             }
         } catch (err) {
-            setError(err.response?.data?.message || 'An error occurred during registration');
+            setError(err.message || 'An error occurred during registration');
             console.error('Registration error:', err);
         } finally {
             setIsLoading(false);
         }
     };
 
-    return ( 
+    return (
         <div className="register__card__container">
             <div className="register__card">
                 <div className="register__header">
                     <h1>Create Account</h1>
                 </div>
-                
+
                 {error && <div className="register__error">{error}</div>}
-                
+
                 <form onSubmit={handleSubmit} className="register__inputs">
                     <div className="fname__input__container reg__input__container">
                         <label htmlFor="firstName" className="fname__label input__label">
                             First name
                         </label>
-                        <input 
+                        <input
                             id="firstName"
                             name="firstName"
-                            type="text" 
-                            className="fname__input register__input" 
+                            type="text"
+                            className="fname__input register__input"
                             value={formData.firstName}
                             onChange={handleInputChange}
                             required
@@ -106,10 +101,10 @@ const RegisterCard = () => {
                         <label htmlFor="lastName" className="lname__label input__label">
                             Last name
                         </label>
-                        <input 
+                        <input
                             id="lastName"
                             name="lastName"
-                            type="text" 
+                            type="text"
                             className="lname__input register__input"
                             value={formData.lastName}
                             onChange={handleInputChange}
@@ -121,11 +116,11 @@ const RegisterCard = () => {
                         <label htmlFor="email" className="email__label input__label">
                             Email
                         </label>
-                        <input 
+                        <input
                             id="email"
                             name="email"
-                            type="email" 
-                            className="email__input register__input" 
+                            type="email"
+                            className="email__input register__input"
                             placeholder="example@gmail.com"
                             value={formData.email}
                             onChange={handleInputChange}
@@ -137,11 +132,11 @@ const RegisterCard = () => {
                         <label htmlFor="password" className="password__label input__label">
                             Password
                         </label>
-                        <input 
+                        <input
                             id="password"
                             name="password"
-                            type="password" 
-                            className="password__input register__input" 
+                            type="password"
+                            className="password__input register__input"
                             value={formData.password}
                             onChange={handleInputChange}
                             required
@@ -150,8 +145,8 @@ const RegisterCard = () => {
                     </div>
 
                     <div className="register__button__container">
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             className="register__button"
                             disabled={isLoading}
                         >
@@ -169,5 +164,5 @@ const RegisterCard = () => {
         </div>
     );
 };
- 
+
 export default RegisterCard;

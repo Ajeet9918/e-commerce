@@ -15,6 +15,7 @@ import SearchView from '../routes/Search';
 import CartItemsProvider from '../Context/CartItemsProvider';
 import Login from '../components/Authentication/Login/Login';
 import Register from '../components/Authentication/Register/Register';
+import ProtectedRoute from '../components/Authentication/ProtectedRoute';
 import Wishlist from '../components/Wishlist';
 import WishItemsProvider from '../Context/WishItemsProvider';
 import { AuthProvider } from '../Context/AuthContext';
@@ -33,8 +34,16 @@ function App() {
                 <Route path="/" element={<Home />} />
 
                 {/* Account */}
-                <Route path="/account/me" element={<MyAccount />} />
-                <Route path="/account/manage" element={<ManageAccount />} />
+                <Route path="/account/me" element={
+                  <ProtectedRoute>
+                    <MyAccount />
+                  </ProtectedRoute>
+                } />
+                <Route path="/account/manage" element={
+                  <ProtectedRoute>
+                    <ManageAccount />
+                  </ProtectedRoute>
+                } />
                 <Route path="/account/login" element={<Login />} />
                 <Route path="/account/register" element={<Register />} />
 

@@ -7,6 +7,10 @@ require("dotenv").config();
 const connectDB = require("./config/db");
 const { Item, User } = require("./models/itemsModel");
 
+// Import routes
+const authRoutes = require("./routes/auth");
+const itemsRoutes = require("./routes/items");
+
 // Connect to DB
 connectDB();
 
@@ -24,44 +28,15 @@ app.get("/", (req, res) => {
     res.send("API is running");
 });
 
-app.post("/api/items", async (req, res) => {
-    try {
-        const item = new Item(req.body);
-        await item.save();
-        res.status(201).json({ success: true, message: "Item saved successfully" });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: "Failed to save item" });
-    }
-});
 
-app.post("/register", async (req, res) => {
-    console.log("Incoming body:", req.body);
-    try {
-        const user = new User(req.body);
-        await user.save();
-        res.status(201).json({ success: true, message: "User registered successfully" });
-    } catch (err) {
-        console.error("Registration error:", err);
-        res.status(500).json({ success: false, message: "Error registering user" });
-    }
-});
 
-app.post("/login", async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const user = await User.findOne({ email });
-        if (!user || user.password !== password) {
-            return res.status(401).json({ success: false, message: "Invalid credentials" });
-        }
-        res.json({ success: true, message: "Login successful" });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ success: false, message: "Server error" });
-    }
-});
+// Use routes
+app.use("/api/auth", authRoutes);
+app.use("/api/items", itemsRoutes);
 
 app.use("/api/payment", require("./routes/payment"));
+
+
 
 
 // app.use(express.static(path.join(__dirname, "/client/dist")));

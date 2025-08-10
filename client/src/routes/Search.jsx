@@ -1,12 +1,9 @@
-import { useParams } from "react-router-dom";
-import Search from "../components/Search";
+import SearchResults from "../components/Search/SearchResults";
 
 const SearchView = () => {
-    const param = useParams()
-    console.log(param.query)
     return ( 
-        <Search />
+        <SearchResults />
      );
 }
- 
+
 export default SearchView;
