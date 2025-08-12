@@ -23,7 +23,7 @@ const SearchResults = () => {
         setError('');
 
         try {
-            const response = await fetch(`http://localhost:5000/api/items/search?query=${encodeURIComponent(searchTerm)}`);
+            const response = await fetch(`https://backend-paw0.onrender.com/api/items/search?query=${encodeURIComponent(searchTerm)}`);
             const data = await response.json();
 
             if (data.success) {
@@ -82,7 +82,7 @@ const SearchResults = () => {
                             <div className="search__item__image">
                                 {item.image && item.image.length > 0 ? (
                                     <img
-                                        src={`http://localhost:5000/${item.image[0].path}`}
+                                        src={`https://backend-paw0.onrender.com/${item.image[0].path}`}
                                         alt={item.name}
                                         onError={(e) => {
                                             e.target.src = 'https://via.placeholder.com/300x200?text=No+Image';

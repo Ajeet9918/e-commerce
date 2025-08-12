@@ -7,7 +7,7 @@ const PaymentButton = ({ amount, email, firstName, lastName }) => {
   const handlePayment = async () => {
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/payment', {
+      const response = await axios.post('https://backend-paw0.onrender.com/api/payment', {
         amount, // Amount in ETB
         email,
         first_name: firstName,

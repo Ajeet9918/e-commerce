@@ -37,9 +37,9 @@ const CartCard = (props) => {
         <div className='cart__item__card'>
             <div className="cart__item__detail">
                 <div className="cart__item__image">
-                    <img 
-                        src={`https://shema-ecommerce.herokuapp.com/${props.item.category}/${props.item.image[0].filename}`} 
-                        alt="item" 
+                    <img
+                        src={`https://backend-paw0.onrender.com/public/${props.item.category}/${props.item.image[0].filename}`}
+                        alt="item"
                         className="item__image"
                     />
                 </div>
@@ -50,12 +50,12 @@ const CartCard = (props) => {
                     <AddCircleIcon />
                 </IconButton>
                 <div className="quantity__input">{props.item.itemQuantity}</div>
-                <IconButton 
-                    onClick={handleQuantityDecrement} 
+                <IconButton
+                    onClick={handleQuantityDecrement}
                     aria-label="decrease quantity"
                     disabled={props.item.itemQuantity <= 1}
                 >
-                    <RemoveCircleIcon fontSize='medium'/>
+                    <RemoveCircleIcon fontSize='medium' />
                 </IconButton>
             </div>
             <div className="product size">
@@ -67,14 +67,14 @@ const CartCard = (props) => {
                             label="size"
                             onChange={handleSizeChange}
                         >
-                        {props.item.size.map((sizeOption) => (
-                            <MenuItem 
-                                key={`${props.item.id}-${sizeOption}`}  // Unique key
-                                value={sizeOption}
-                            >
-                                {sizeOption}
-                            </MenuItem>
-                        ))}
+                            {props.item.size.map((sizeOption) => (
+                                <MenuItem
+                                    key={`${props.item.id}-${sizeOption}`}  // Unique key
+                                    value={sizeOption}
+                                >
+                                    {sizeOption}
+                                </MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
                 </Box>
@@ -88,5 +88,5 @@ const CartCard = (props) => {
         </div>
     );
 }
- 
+
 export default CartCard;

@@ -13,7 +13,7 @@ const CategoryView = () => {
         window.scrollTo(0, 0);
         setLoading(true);
 
-        axios.get("https://shema-backend.vercel.app/api/items")
+        axios.get("https://backend-paw0.onrender.com/api/items")
             .then(res => {
                 const filtered = res.data.filter(item => item.category === id);
                 setItems(filtered);

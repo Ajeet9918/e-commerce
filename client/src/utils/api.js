@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'https://backend-paw0.onrender.com/api';
 
 // Helper function to get auth token
 const getAuthToken = () => {
@@ -43,11 +43,11 @@ export const authAPI = {
         method: 'POST',
         body: JSON.stringify(credentials)
     }),
-    
+
     register: (userData) => apiCall('/auth/register', {
         method: 'POST',
         body: JSON.stringify(userData)
     }),
-    
+
     getCurrentUser: () => apiCall('/auth/me')
 }; 

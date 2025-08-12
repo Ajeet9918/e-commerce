@@ -11,7 +11,7 @@ const ProductView = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        axios.get("https://shema-backend.vercel.app/api/items")
+        axios.get("https://backend-paw0.onrender.com/api/items")
             .then(res => {
                 const foundItem = res.data.find(item => item._id === id);
                 setItem(foundItem);

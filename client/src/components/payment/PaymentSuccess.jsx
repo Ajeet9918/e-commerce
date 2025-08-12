@@ -8,7 +8,7 @@ const PaymentSuccess = () => {
   useEffect(() => {
     const verifyPayment = async () => {
       try {
-        await axios.get(`http://localhost:5000/payment/verify/${tx_ref}`);
+        await axios.get(`https://backend-paw0.onrender.com/api/payment/verify/${tx_ref}`);
         alert('Payment verified!');
         // Save order to database or update UI
       } catch (error) {

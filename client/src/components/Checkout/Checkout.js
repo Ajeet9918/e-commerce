@@ -33,13 +33,13 @@ const Checkout = () => {
 
             // Initialize payment with backend
             const response = await axios.post(
-                'http://localhost:5000/payment', 
+                'https://backend-paw0.onrender.com/api/payment',
                 paymentData
             );
 
             // Redirect to Chapa checkout page
             window.location.href = response.data;
-            
+
         } catch (err) {
             console.error('Payment error:', err);
             setError('Failed to initialize payment. Please try again.');
@@ -48,17 +48,17 @@ const Checkout = () => {
         }
     };
 
-    return ( 
+    return (
         <div className="checkout-container">
             <h2 className="checkout-title">Checkout Summary</h2>
-            
+
             <div className="checkout-summary">
                 <div className="checkout-items">
                     {cartItems.map(item => (
                         <div key={item._id} className="checkout-item">
-                            <img 
-                                src={`https://shema-backend.vercel.app/public/${item.category}/${item.image[0].filename}`} 
-                                alt={item.name} 
+                            <img
+                                src={`https://backend-paw0.onrender.com/public/${item.category}/${item.image[0].filename}`}
+                                alt={item.name}
                                 className="checkout-item-image"
                             />
                             <div className="checkout-item-details">
@@ -73,7 +73,7 @@ const Checkout = () => {
                 <div className="checkout-total">
                     <h3>Order Total</h3>
                     <p>ETB {cartTotal.toFixed(2)}</p>
-                    <button 
+                    <button
                         onClick={handlePayment}
                         disabled={loading || cartItems.length === 0}
                         className="payment-button"
@@ -86,5 +86,5 @@ const Checkout = () => {
         </div>
     );
 };
- 
+
 export default Checkout;
