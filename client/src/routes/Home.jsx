@@ -26,7 +26,7 @@ const Home = () => {
         const fetchFeaturedItems = async () => {
             try {
                 const res = await axios.get("https://shema-backend.vercel.app/api/items");
-                setFeaturedItems(res.data);
+                setFeaturedItems(res.data.items);
             } catch (err) {
                 console.error("Error fetching featured items:", err);
                 setError("Failed to load featured items. Please try again later.");

@@ -13,7 +13,7 @@ const ProductView = () => {
         window.scrollTo(0, 0);
         axios.get("https://backend-paw0.onrender.com/api/items")
             .then(res => {
-                const foundItem = res.data.find(item => item._id === id);
+                const foundItem = res.data.items.find(item => item._id === id);
                 setItem(foundItem);
                 setLoading(false);
             })

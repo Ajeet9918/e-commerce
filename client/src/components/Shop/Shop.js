@@ -15,9 +15,9 @@ const Shop = () => {
     useEffect(() => {
         axios.get("https://shema-backend.vercel.app/api/items")
             .then(res => {
-                setMenItems(res.data.filter((item) => item.category === "men"))
-                setKidsItems(res.data.filter((item) => item.category === "kids" ))
-                setWomenItems(res.data.filter((item) => item.category === "women"))
+                setMenItems(res.data.items.filter((item) => item.category === "men"))
+                setKidsItems(res.data.items.filter((item) => item.category === "kids" ))
+                setWomenItems(res.data.items.filter((item) => item.category === "women"))
                 setLoading(false)
             })
             .catch(err => console.log(err))
