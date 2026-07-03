@@ -25,7 +25,7 @@ const Home = () => {
     useEffect(() => {
         const fetchFeaturedItems = async () => {
             try {
-                const res = await axios.get("https://shema-backend.vercel.app/api/items");
+                const res = await axios.get("https://backend-paw0.onrender.com/api/items");
                 setFeaturedItems(res.data.items);
             } catch (err) {
                 console.error("Error fetching featured items:", err);
