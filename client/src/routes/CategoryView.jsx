@@ -15,7 +15,7 @@ const CategoryView = () => {
 
         axios.get("https://backend-paw0.onrender.com/api/items")
             .then(res => {
-                const filtered = res.data.filter(item => item.category === id);
+                const filtered = res.data.items.filter(item => item.category === id);
                 setItems(filtered);
                 setLoading(false);
             })
