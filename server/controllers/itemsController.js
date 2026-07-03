@@ -30,8 +30,8 @@ const searchItems = async (req, res) => {
             });
         }
 
-        // Search in multiple fields: name, category, type, description
-        const searchRegex = new RegExp(query, 'i'); // 'i' for case-insensitive
+        const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const searchRegex = new RegExp(escapeRegex(query), 'i');
 
         const items = await Item.find({
             $or: [
@@ -59,37 +59,36 @@ const searchItems = async (req, res) => {
 
 /* POST Request handler */
 const addItem = async (req, res) => {
-    const highlights = req.body.highlights.split(",")
-    const size = req.body.size.split(",")
+    const { name, category, type, color, description, price, highlights, size, detail } = req.body;
 
-    /* The request.body must have all these values */
-    const item = {
-        name: req.body.name,
-        category: req.body.category,
-        type: req.body.type,
-        color: req.body.color,
-        description: req.body.description,
-        price: req.body.price,
-        image: req.files,
-        size: size,
-        highlights: highlights,
-        detail: req.body.detail
-    }
-
-    if (item) {
-        await Item.create(item)
-        res.status(201).json({
-            success: true,
-            message: "Items Add Success"
-        })
-    }
-    else {
-        res.status(400).json({
+    if (!name || !category || !type || !color || !description || !price || !highlights || !size) {
+        return res.status(400).json({
             success: false,
-            message: "Unable to add item"
-        })
+            message: "Missing required fields"
+        });
     }
-}
+
+    const item = {
+        name,
+        category,
+        type,
+        color,
+        description,
+        price,
+        image: req.files,
+        size: size.split(","),
+        highlights: highlights.split(","),
+        detail
+    };
+
+    try {
+        await Item.create(item);
+        res.status(201).json({ success: true, message: "Items Add Success" });
+    } catch (error) {
+        console.error('Add item error:', error);
+        res.status(400).json({ success: false, message: "Unable to add item" });
+    }
+};
 
 /* PUT Request handler */
 const updateItem = (req, res) => {
